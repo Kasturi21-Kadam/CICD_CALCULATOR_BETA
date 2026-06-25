@@ -1,5 +1,4 @@
-# Triggering a fresh workflow run
-name: Python CI
+name: Flask CI Pipeline
 
 on:
   push:
@@ -10,7 +9,7 @@ on:
       - main
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,9 +24,9 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          pip install -r requirements.txt
 
       - name: Run Tests
         run: |
+          pip install pytest
           pytest -v
-
